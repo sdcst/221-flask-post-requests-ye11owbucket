@@ -1,20 +1,47 @@
 from flask import Flask,request
 from flask_cors import CORS
 import json
+import time
+import random 
 
 app = Flask(__name__)
 CORS(app)
 
-@app.route("/post",methods=["POST"])
-def postResponse():
-    # a simple echo server that response with the payload received.
-    payload = request.form
-    data = dict(payload)
-    print(data)
-    return json.dumps(data)
+@app.route("/",methods=["POST","GET"])
+def functo1():
+    words = []
+    quotes = open("dbase.txt","r")
+    quotes = quotes.read()
+    list = quotes.split("\n")
+    for i in list:
+        if i not in words:
+            words.append(i)
+    y = (random.choice(words))
+    return y
+
+@app.route("/admin",methods=["POST","GET"])
+def functo2():
+    words = []
+    quotes = open('dbase.txt',"r")
+    quotes = quotes.read()
+    list = quotes.split("\n")
+    for i in list:
+        if i not in words:
+            words.append(i)
+        x = ""
+        for i in words:
+            x = x + i + "<br>"
+            return x
 
 
-search = "https://www.google.com/search?q=cats"
+@app.route("/add",methods=["POST","GET"])
+def functo3():
+    form_data = request.form
+    form_data = dict(form_data)
+    with open('dbase.txt',"a") as x:
+        x.write(f"\n{form_data['var1']}")
+    return "complete"
+
 
 app.run()
 
