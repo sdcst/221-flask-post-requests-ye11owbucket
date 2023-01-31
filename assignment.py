@@ -28,18 +28,19 @@ def functo2():
     for i in list:
         if i not in words:
             words.append(i)
-        x = ""
+        x = ''
         for i in words:
-            return i + "<br>"
+            x = x + f"{i}<br>"
+        return x
 
 
 @app.route("/add",methods=["POST","GET"])
 def functo3():
     form_data = request.form
     form_data = dict(form_data)
-    with open('dbase.txt',"a") as x:
-        x.write(f"\n{form_data['var1']}")
-    return "complete"
+    with open('dbase.txt','a') as f:
+        f.write(f"\n{form_data['val1']}")
+    return 'recieved'
 
 
 app.run()
