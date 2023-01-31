@@ -30,8 +30,7 @@ def functo2():
             words.append(i)
         x = ""
         for i in words:
-            x = x + i + "<br>"
-            return x
+            return i + "<br>"
 
 
 @app.route("/add",methods=["POST","GET"])
